@@ -2,6 +2,9 @@ require 'mail'
 require_relative 'mail_template'
 require 'date'
 
+require_relative 'logging'
+include Logging
+
 Mail.defaults do
   delivery_method :smtp, {
     address:              'smtp.sendgrid.net',
@@ -17,6 +20,8 @@ end
 if __FILE__ == $PROGRAM_NAME
   return if ENV['TO_MAIL_ADDRESS'].nil? || ENV['FROM_MAIL_ADDRESS'].nil?
 
+  logger.info 'Start'
+
   Mail.deliver do
     to      ENV['TO_MAIL_ADDRESS']
     from    ENV['FROM_MAIL_ADDRESS']
@@ -24,4 +29,6 @@ if __FILE__ == $PROGRAM_NAME
     body    MailTemplate.render
     charset 'utf-8'
   end
+
+  logger.info 'End'
 end
