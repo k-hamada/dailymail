@@ -1,7 +1,7 @@
 require 'mustache'
 
-require_relative 'logging'
-require_relative 'memorizable'
+require_relative 'util/logging'
+require_relative 'util/memorizable'
 include Memoizable
 
 TEMPLATE_DIR = '/view'
