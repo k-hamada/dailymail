@@ -22,5 +22,6 @@ if __FILE__ == $PROGRAM_NAME
     from    ENV['FROM_MAIL_ADDRESS']
     subject Date.today.strftime('%Y/%m/%d (%a)')
     body    MailTemplate.render
+    charset 'utf-8'
   end
 end
