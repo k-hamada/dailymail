@@ -22,13 +22,15 @@ if __FILE__ == $PROGRAM_NAME
 
   logger.info 'Start'
 
-  Mail.deliver do
+  mail = Mail.new do
     to      ENV['TO_MAIL_ADDRESS']
     from    ENV['FROM_MAIL_ADDRESS']
     subject Date.today.strftime('%Y/%m/%d (%a)')
     body    MailTemplate.render
-    charset 'utf-8'
   end
+
+  mail.charset = 'utf-8'
+  mail.deliver
 
   logger.info 'End'
 end
