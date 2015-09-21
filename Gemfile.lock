@@ -1,0 +1,14 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mail (2.6.3)
+      mime-types (>= 1.16, < 3)
+    mime-types (2.6.2)
+    mustache (1.0.2)
+
+DEPENDENCIES
+  mail
+  mustache
+
+BUNDLED WITH
+   1.10.6
