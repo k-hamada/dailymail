@@ -1,5 +1,6 @@
 require_relative 'base_mustache'
 require_relative 'weather'
+require_relative 'service/weather_service'
 
 require 'date'
 
@@ -16,7 +17,8 @@ class MailTemplate < BaseMustache
   def weather
     logger.info 'weather'
 
-    weather = Weather.new(CITY)
+    service = WeatherService.new(CITY)
+    weather = Weather.new(service)
     weather.render
   end
 end

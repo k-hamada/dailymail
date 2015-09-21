@@ -1,19 +1,14 @@
 require_relative 'base_mustache'
 
-require 'net/http'
-require 'uri'
-require 'json'
 require 'date'
 
 class Weather < BaseMustache
   include Logging
 
-  def initialize(city = '130010')
+  def initialize(service)
     super()
 
-    uri = URI.parse("http://weather.livedoor.com/forecast/webservice/json/v1?city=#{city}")
-    json = Net::HTTP.get(uri)
-    @result = JSON.parse(json)
+    @result = service.fetch
   end
 
   def location
