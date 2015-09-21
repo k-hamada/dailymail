@@ -1,20 +1,15 @@
+require_relative 'base_mustache'
+
 require 'net/http'
 require 'uri'
 require 'json'
-require 'mustache'
 require 'date'
 
-require_relative 'memorizable'
-include Memoizable
-require_relative 'logging'
-
-class Weather < Mustache
+class Weather < BaseMustache
   include Logging
 
-  self.template_path = File.dirname(__FILE__)
-
   def initialize(city = '130010')
-    logger.info 'initialize'
+    super()
 
     uri = URI.parse("http://weather.livedoor.com/forecast/webservice/json/v1?city=#{city}")
     json = Net::HTTP.get(uri)
