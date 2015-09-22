@@ -1,5 +1,5 @@
 require_relative 'base_mustache'
-require_relative 'weather'
+require_relative 'model/weather'
 require_relative 'service/weather_service'
 
 require 'date'

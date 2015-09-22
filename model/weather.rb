@@ -1,4 +1,4 @@
-require_relative 'base_mustache'
+require_relative '../base_mustache'
 
 require 'date'
 
