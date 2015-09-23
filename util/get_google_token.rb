@@ -24,8 +24,8 @@ end
 
 puts [
   'config:set',
-  "CLIENT_ID=#{client.authorization.client_id}",
-  "CLIENT_SECRET=#{client.authorization.client_secret}",
-  "REFRESH_TOKEN=#{client.authorization.refresh_token}",
-  "ACCESS_TOKEN=#{client.authorization.access_token}",
-].join
+  "CLIENT_ID=#{file_storage.authorization.client_id}",
+  "CLIENT_SECRET=#{file_storage.authorization.client_secret}",
+  "REFRESH_TOKEN=#{file_storage.authorization.refresh_token}",
+  "ACCESS_TOKEN=#{file_storage.authorization.access_token}",
+].join(' ')
