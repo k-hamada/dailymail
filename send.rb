@@ -2,7 +2,7 @@ require 'mail'
 require_relative 'mail_template'
 require 'date'
 
-require_relative 'logging'
+require_relative 'util/logging'
 include Logging
 
 Mail.defaults do
