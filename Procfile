@@ -1,1 +1,1 @@
-sendmail: bundle exec ruby send.rb
+sendmail: bundle exec ruby daily_mail.rb
