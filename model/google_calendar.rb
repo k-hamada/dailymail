@@ -35,11 +35,13 @@ class GoogleCalendar < BaseMustache
     today = Time.now
     tomorrow = today + (60 * 60 * 24)
 
-    @result = service.fetch(
+    @service = service
+    @result = @service.fetch(
       calendar_id: calendar_id,
       time_min: today.strftime('%FT00:00:00%:z'),
       time_max: tomorrow.strftime('%FT00:00:00%:z'),
     )
+    @resource = @service.calendar_list['items'].find{|item| item['id'] == calendar_id }
   end
 
   def visible?
@@ -47,7 +49,7 @@ class GoogleCalendar < BaseMustache
   end
 
   def summary
-    @result['summary']
+    @resource.fetch('summaryOverride', @result.fetch('summary'))
   end
 
   def items

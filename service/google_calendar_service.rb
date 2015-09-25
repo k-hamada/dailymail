@@ -29,4 +29,9 @@ class GoogleCalendarService
                             :parameters => params)
     JSON.parse(result.response.body)
   end
+
+  def calendar_list
+    @calendar_list ||= @client.execute(:api_method => @calendar.calendar_list.list)
+    JSON.parse(@calendar_list.response.body)
+  end
 end
