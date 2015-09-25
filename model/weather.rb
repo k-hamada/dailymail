@@ -5,10 +5,11 @@ require 'date'
 class Weather < BaseMustache
   include Logging
 
-  def initialize(service)
-    super()
+  def initialize(service, city_id)
+    logger.info city_id
 
-    @result = service.fetch
+    @service = service
+    @result = @service.fetch(city_id: city_id)
   end
 
   def location

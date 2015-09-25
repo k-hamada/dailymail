@@ -8,14 +8,16 @@ require_relative 'util/logging'
 class DailyMail
   include Logging
 
-  CITY = '130010'
-
   def weather
     logger.info 'weather'
 
-    service = WeatherService.new(CITY)
-    weather = Weather.new(service)
-    weather.render
+    service = WeatherService.new
+
+    weather_ids = ENV['WEATHER_CITY_IDS'].split(';')
+    weather_ids.map{|city_id|
+      weather = Weather.new(service, city_id)
+      weather.render
+    }.join
   end
 
   def calendar
