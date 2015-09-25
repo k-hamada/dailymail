@@ -45,14 +45,20 @@ class GoogleCalendar < BaseMustache
   end
 
   def visible?
+    logger.info 'visible?'
+
     @result.key?('items') && !@result['items'].empty?
   end
 
   def summary
+    logger.info 'summary'
+
     @resource.fetch('summaryOverride', @result.fetch('summary'))
   end
 
   def items
+    logger.info 'items'
+
     @result['items']
   end
 end
