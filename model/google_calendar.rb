@@ -35,8 +35,8 @@ class GoogleCalendar < BaseMustache
     @service = service
     @result = @service.fetch(
       calendar_id: calendar_id,
-      time_min: Date.today.strftime('%FT00:00:00%:z'),
-      time_max: Date.today.next_day.strftime('%FT03:00:00%:z'),
+      time_min: Date.today.to_time.strftime('%FT00:00:00%:z'),
+      time_max: Date.today.next_day.to_time.strftime('%FT03:00:00%:z'),
     )
     @resource = @service.calendar_list['items'].find{|item| item['id'] == calendar_id }
   end
