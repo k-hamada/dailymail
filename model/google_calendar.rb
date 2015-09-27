@@ -32,14 +32,11 @@ class GoogleCalendar < BaseMustache
   def initialize(service, calendar_id)
     logger.info calendar_id
 
-    today = Time.now
-    tomorrow = today + (60 * 60 * 24)
-
     @service = service
     @result = @service.fetch(
       calendar_id: calendar_id,
-      time_min: today.strftime('%FT00:00:00%:z'),
-      time_max: tomorrow.strftime('%FT00:00:00%:z'),
+      time_min: Date.today.strftime('%FT00:00:00%:z'),
+      time_max: Date.today.next_day.strftime('%FT03:00:00%:z'),
     )
     @resource = @service.calendar_list['items'].find{|item| item['id'] == calendar_id }
   end
