@@ -56,6 +56,18 @@ class GoogleCalendar < BaseMustache
   def items
     logger.info 'items'
 
+    reject_finished_item!
     @result['items']
+  end
+
+  private
+
+  # 現在時刻以前の時間に終了時間を迎えた予定は除外
+  def reject_finished_item!
+    now = Time.now
+    @result['items'].reject! do |item|
+      item['end'].key?('dateTime') &&
+      ((Time.parse(item['end']['dateTime']) <=> now) < 1)
+    end
   end
 end
