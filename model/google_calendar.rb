@@ -39,6 +39,8 @@ class GoogleCalendar < BaseMustache
       time_max: Date.today.next_day.to_time.strftime('%FT03:00:00%:z'),
     )
     @resource = @service.calendar_list['items'].find{|item| item['id'] == calendar_id }
+
+    reject_finished_item!
   end
 
   def visible?
@@ -56,7 +58,6 @@ class GoogleCalendar < BaseMustache
   def items
     logger.info 'items'
 
-    reject_finished_item!
     @result['items']
   end
 
