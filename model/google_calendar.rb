@@ -40,13 +40,14 @@ class GoogleCalendar < BaseMustache
     )
     @resource = @service.calendar_list['items'].find{|item| item['id'] == calendar_id }
 
+    fix_empty_items!
     reject_finished_item!
   end
 
   def visible?
     logger.info 'visible?'
 
-    @result.key?('items') && !@result['items'].empty?
+    not @result['items'].empty?
   end
 
   def summary
@@ -62,6 +63,12 @@ class GoogleCalendar < BaseMustache
   end
 
   private
+
+  def fix_empty_items!
+    unless @result.key?('items')
+      @result['items'] = []
+    end
+  end
 
   # 現在時刻以前の時間に終了時間を迎えた予定は除外
   def reject_finished_item!
